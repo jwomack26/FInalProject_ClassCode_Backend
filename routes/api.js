@@ -12,6 +12,7 @@ const {Category, Question, Answer} = require('../lib/models');
 
 router.get('/categories', async function(req, res, next) {
     let categories = await Category.findAll({});
+    console.log(categories)
     res.json(categories);
 });
 
@@ -22,8 +23,9 @@ router.post('/categories/:categoryId/questions', async function(req, res, next) 
     res.json(question);
 });
 
+
 router.get('/categories/:categoryId/questions', async function(req, res, next) {
-    let questions = await Question.findAll({where: {categoryId: req.params.categoryId}});
+    let questions = await Question.findAll({where: {categoryId: req.params.categoryId}, include:[{ model:Answer}]});
     res.json(questions);
 });
 
