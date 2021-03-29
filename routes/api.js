@@ -16,6 +16,13 @@ router.get('/categories', async function(req, res, next) {
     res.json(categories);
 });
 
+
+router.get('/questions', async function(req, res, next) {
+    let questions = await Question.findAll({});
+    console.log(questions)
+    res.json(questions);
+});
+
 router.post('/categories/:categoryId/questions', async function(req, res, next) {
     let body = req.body;
     body.categoryId = req.params.categoryId;
